@@ -1,12 +1,12 @@
 # DC-Expts
 
-<h2>#Implement a Client/server using RPC</h2>
+<h2>Implement a Client/server using RPC</h2>
 <h3>Client file</h3>
-<P>from xmlrpc.server import SimpleXMLRPCServer
+<p>from xmlrpc.server import SimpleXMLRPCServer
 import xmlrpc.client
 import threading
 
-# Function the server can call to send a message
+//Function the server can call to send a message
 class ClientFunctions:
     def receive_message(self, msg):
         print(f"Server: {msg}")
@@ -18,23 +18,23 @@ def run_client_server():
     print("Client RPC listening on port 8001...")
     server.serve_forever()
 
-# Run client-side RPC server in background
+//Run client-side RPC server in background
 threading.Thread(target=run_client_server, daemon=True).start()
 
-# Connect to server RPC
+//Connect to server RPC
 server = xmlrpc.client.ServerProxy("http://localhost:8000/")
 
-# Client sends message to server
+//Client sends message to server
 while True:
     msg = input("Client (you): ")
     server.receive_message(msg)
-</P>
+</p>
 <h3>Server File</h3>
 <P>from xmlrpc.server import SimpleXMLRPCServer
 import xmlrpc.client
 import threading
 
-# Function the client can call to send a message
+//Function the client can call to send a message
 class ServerFunctions:
     def receive_message(self, msg):
         print(f"Client: {msg}")
@@ -46,13 +46,13 @@ def run_server():
     print("Server RPC listening on port 8000...")
     server.serve_forever()
 
-# Run server in a background thread
+//Run server in a background thread
 threading.Thread(target=run_server, daemon=True).start()
 
-# Connect to client RPC
+//Connect to client RPC
 client = xmlrpc.client.ServerProxy("http://localhost:8001/")
 
-# Server sends message to client
+//Server sends message to client
 while True:
     msg = input("Server (you): ")
     client.receive_message(msg)
@@ -64,10 +64,10 @@ import threading
 import queue
 import time
 
-# Create a shared queue for communication
+//Create a shared queue for communication
 message_queue = queue.Queue()
 
-# Worker thread function - receives messages from the queue
+//Worker thread function - receives messages from the queue
 def worker_thread(name):
     while True:
         message = message_queue.get()  # Block until a message is available
@@ -77,7 +77,7 @@ def worker_thread(name):
         print(f"{name} received message: {message}")
         time.sleep(1)
 
-# Producer thread function - sends messages to the queue
+//Producer thread function - sends messages to the queue
 def producer_thread():
     for i in range(5):
         msg = f"Message {i}"
@@ -89,18 +89,18 @@ def producer_thread():
     message_queue.put("EXIT")
     message_queue.put("EXIT")
 
-# Create and start worker threads
+//Create and start worker threads
 worker1 = threading.Thread(target=worker_thread, args=("Worker 1",))
 worker2 = threading.Thread(target=worker_thread, args=("Worker 2",))
 
 worker1.start()
 worker2.start()
 
-# Start the producer thread
+//Start the producer thread
 producer = threading.Thread(target=producer_thread)
 producer.start()
 
-# Wait for all threads to finish
+//Wait for all threads to finish
 producer.join()
 worker1.join()
 worker2.join()
@@ -115,14 +115,14 @@ import socket
 localIP = "127.0.0.1"
 localPort = 20001
 bufferSize = 1024
-# Create a datagram socket
+//Create a datagram socket
 UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 #UDPServerSocket2 = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-# Bind to address and ip
+//Bind to address and ip
 UDPServerSocket.bind((localIP, localPort))
 #UDPServerSocket2.bind((localIP, localPort))
 print("UDP server up and listening")
-# Listen for incoming datagrams
+//Listen for incoming datagrams
 while(True):
     bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
     message = bytesAddressPair[0]
@@ -134,7 +134,7 @@ while(True):
 #print(clientIP)
     msgFromServer = input("Enter your message for client "+m[len(m)-1]+": ")
     bytesToSend = str.encode(msgFromServer)
-# Sending a reply to client
+//Sending a reply to client
     UDPServerSocket.sendto(bytesToSend, address)
 </p>
 <h3>Client1 file</h3>
@@ -146,9 +146,9 @@ while True:
     bytesToSend = str.encode(msgFromClient +"1")
     serverAddressPort = ("127.0.0.1", 20001)
     bufferSize = 1024
-# Create a UDP socket at client side
+//Create a UDP socket at client side
     UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-# Send to server using created UDP socket
+//Send to server using created UDP socket
     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
     msgFromServer = UDPClientSocket.recvfrom(bufferSize)
     msg = "Message from Server :{}".format(msgFromServer[0].decode())
@@ -164,9 +164,9 @@ while True:
     bytesToSend = str.encode(msgFromClient +"2")
     serverAddressPort = ("127.0.0.1", 20001)
     bufferSize = 1024
-# Create a UDP socket at client side
+//Create a UDP socket at client side
     UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-# Send to server using created UDP socket
+//Send to server using created UDP socket
     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
     msgFromServer = UDPClientSocket.recvfrom(bufferSize)
     msg = "Message from Server :{}".format(msgFromServer[0].decode())
@@ -182,13 +182,13 @@ while True:
     bytesToSend = str.encode(msgFromClient +"3")
     serverAddressPort = ("127.0.0.1", 20001)
     bufferSize = 1024
-# Create a UDP socket at client side
+//Create a UDP socket at client side
     UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-# Send to server using created UDP socket
+//Send to server using created UDP socket
     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
     msgFromServer = UDPClientSocket.recvfrom(bufferSize)
     msg = "Message from Server :{}".format(msgFromServer[0].decode())
-#time.sleep(5)
+//time.sleep(5)
     print(msg)
 </p>
 <hr>
@@ -223,7 +223,7 @@ class LoadBalancer:
             print(f"Server '{server}' not found.")
 
 
-# Example usage
+//Example usage
 if __name__ == "__main__":
     servers = ["Server1", "Server2", "Server3"]
     lb = LoadBalancer(servers)
@@ -293,7 +293,7 @@ class Process:
 
 # Simulation
 if __name__ == "__main__":
-    # Create processes with IDs
+    //Create processes with IDs
     processes = [
         Process(1),
         Process(2),
