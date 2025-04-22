@@ -2,7 +2,7 @@
 
 <h2>#Implement a Client/server using RPC</h2>
 <h3>Client file</h3>
-from xmlrpc.server import SimpleXMLRPCServer
+<P>from xmlrpc.server import SimpleXMLRPCServer
 import xmlrpc.client
 import threading
 
@@ -28,9 +28,9 @@ server = xmlrpc.client.ServerProxy("http://localhost:8000/")
 while True:
     msg = input("Client (you): ")
     server.receive_message(msg)
-
+</P>
 <h3>Server File</h3>
-from xmlrpc.server import SimpleXMLRPCServer
+<P>from xmlrpc.server import SimpleXMLRPCServer
 import xmlrpc.client
 import threading
 
@@ -56,8 +56,10 @@ client = xmlrpc.client.ServerProxy("http://localhost:8001/")
 while True:
     msg = input("Server (you): ")
     client.receive_message(msg)
-
+</P>
+<hr>
 <h2>Simulate interprocess communication using multi-thread application</h2>
+<P>
 import threading
 import queue
 import time
@@ -104,9 +106,11 @@ worker1.join()
 worker2.join()
 
 print("All threads have finished.")
-
+</P>
+<hr>
 <h2>Implement at a program for Group Communication</h2>
 <h3>Server File</h3>
+<p>
 import socket
 localIP = "127.0.0.1"
 localPort = 20001
@@ -132,8 +136,9 @@ while(True):
     bytesToSend = str.encode(msgFromServer)
 # Sending a reply to client
     UDPServerSocket.sendto(bytesToSend, address)
-
+</p>
 <h3>Client1 file</h3>
+<P>
 import socket
 import time
 while True:
@@ -149,8 +154,9 @@ while True:
     msg = "Message from Server :{}".format(msgFromServer[0].decode())
 #time.sleep(5)
     print(msg)
-
+</P>
 <h3>Client2 file</h3>
+<P>
 import socket
 import time
 while True:
@@ -166,8 +172,9 @@ while True:
     msg = "Message from Server :{}".format(msgFromServer[0].decode())
 #time.sleep(5)
     print(msg)
-
+</P>
 <h3>Client3 file</h3>
+<p>
 import socket
 import time
 while True:
@@ -183,9 +190,10 @@ while True:
     msg = "Message from Server :{}".format(msgFromServer[0].decode())
 #time.sleep(5)
     print(msg)
-
-
+</p>
+<hr>
 <h2>Implementation a Load Balancing Algorithm</h2>
+<P>
 class LoadBalancer:
     def __init__(self, servers):
         self.servers = servers
@@ -223,9 +231,10 @@ if __name__ == "__main__":
     for i in range(10):
         selected_server = lb.get_next_server()
         print(f"Request {i+1} is handled by {selected_server}")
-
-
+</P>
+<hr>
 <h2>Simulate the functioning of Lamport‟s Logical Clock</h2>
+<p>
 class Process:
     def __init__(self, pid):
         self.pid = pid
@@ -257,9 +266,10 @@ if __name__ == "__main__":
     p2.internal_event()          # Event in P2
     p2.send_message(p1)          # P2 sends to P1
     p1.internal_event()          # Event in P1
-
-
+</p>
+<hr>
 <h2>Implement an Election Algorithm.</h2>
+<P>
 class Process:
     def __init__(self, pid, is_alive=True):
         self.pid = pid
@@ -299,3 +309,4 @@ if __name__ == "__main__":
     # Process 2 detects the failure and starts an election
     new_coordinator = processes[1].start_election(processes)
     print(f"\n✅ Process {new_coordinator} is elected as the new coordinator.")
+</P>
